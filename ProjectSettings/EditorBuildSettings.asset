@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/First floor.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Victory Screen.unity
+    guid: 5438da71c0e49cd4ebdbf8440b50a2d3
+  - enabled: 1
+    path: Assets/Scenes/Death Screen.unity
+    guid: 5f9f0777cffc44248be38ad9cba52a8b
+  - enabled: 1
+    path: Assets/Scenes/Second Floor.unity
+    guid: 6c15422386553434f82807f339e8d031
   m_configObjects: {}
