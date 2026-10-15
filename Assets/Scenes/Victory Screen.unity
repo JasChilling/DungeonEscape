@@ -275,7 +275,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 703958609}
         m_TargetAssemblyTypeName: GameManger, Assembly-CSharp
-        m_MethodName: LoadSecondFloor
+        m_MethodName: ProceedToNextLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
