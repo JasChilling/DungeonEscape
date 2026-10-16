@@ -16,6 +16,7 @@ public class Audio_Mangaer : MonoBehaviour
     public AudioClip win;
     public AudioClip damage;
     public AudioClip pressButton;
+    public AudioClip RedLight;
 
     private void Awake()
     {
@@ -35,7 +36,7 @@ public class Audio_Mangaer : MonoBehaviour
         if (musicSource != null && background != null)
         {
             musicSource.clip = background;
-            musicSource.loop = true; 
+            musicSource.loop = true;
             musicSource.Play();
         }
     }
@@ -80,10 +81,10 @@ public class Audio_Mangaer : MonoBehaviour
 
     public void playClicKSound()
     {
-       if (sfxSource != null && pressButton != null)
-            {
-                sfxSource.PlayOneShot(pressButton);
-            }
+        if (sfxSource != null && pressButton != null)
+        {
+            sfxSource.PlayOneShot(pressButton);
+        }
     }
     public void PlayCollectSound()
     {
@@ -105,11 +106,24 @@ public class Audio_Mangaer : MonoBehaviour
     }
     public void PlayWinMusic()
     {
+
         if (musicSource != null && win != null)
         {
             musicSource.clip = win;
             musicSource.loop = false;
             musicSource.Play();
+
+        }
+    }
+
+    public void PlayRedLightSound()
+    {
+        if (musicSource != null && win != null)
+        {
+            musicSource.clip = RedLight;
+            musicSource.loop = false;
+            musicSource.Play();
+
 
         }
     }
