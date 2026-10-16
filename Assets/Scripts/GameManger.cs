@@ -21,10 +21,24 @@ public class GameManger : MonoBehaviour
 
     private bool gameEnded = false;
 
+   
+    private static string lastPlayedLevel = "First floor";
+
     void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+    }
+
+    private void Start()
+    {
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        
+        if (currentScene == "First floor" || currentScene == "Second floor" || currentScene == "Second Floor" || currentScene == "Floor 3")
+        {
+            lastPlayedLevel = currentScene;
+        }
     }
 
     private void Update()
@@ -80,38 +94,66 @@ public class GameManger : MonoBehaviour
 
     void TriggerDeath()
     {
+        if (gameEnded) return;
         gameEnded = true;
         Time.timeScale = 1f;
-
 
         if (Audio_Mangaer.Instance != null)
         {
             Audio_Mangaer.Instance.PlayDeathMusic();
         }
 
-        SceneManager.LoadScene("Death Screen");
+        // Wait a fraction of a second so the music starts before loading the scene
+        StartCoroutine(LoadSceneWithDelay("Death Screen"));
     }
 
     void TriggerVictory()
     {
+        if (gameEnded) return;
         gameEnded = true;
         Time.timeScale = 1f;
-
 
         if (Audio_Mangaer.Instance != null)
         {
             Audio_Mangaer.Instance.PlayWinMusic();
         }
 
-        SceneManager.LoadScene("Victory Screen");
+        StartCoroutine(LoadSceneWithDelay("Victory Screen"));
+    }
+
+    IEnumerator LoadSceneWithDelay(string sceneName)
+    {
+        yield return new WaitForSecondsRealtime(0.5f); // Plays audio for 0.5 seconds before switching scenes
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void ProceedToNextLevel()
+    {
+        playClickSound();
+        Time.timeScale = 1f;
+
+        // Determines next scene based on the last active level played
+        if (lastPlayedLevel == "First floor")
+        {
+            SceneManager.LoadScene("Second Floor");
+        }
+        else if (lastPlayedLevel == "Second floor" || lastPlayedLevel == "Second Floor")
+        {
+            SceneManager.LoadScene("Floor 3");
+        }
+        else
+        {
+            SceneManager.LoadScene("Start Menu");
+        }
     }
 
     public void RestartLevel()
     {
         playClickSound();
         Time.timeScale = 1f;
-        
-        SceneManager.LoadScene("First floor");
+
+      
+        SceneManager.LoadScene(lastPlayedLevel);
     }
 
     public void LoadSecondFloor()
@@ -119,6 +161,13 @@ public class GameManger : MonoBehaviour
         playClickSound();
         Time.timeScale = 1f;
         SceneManager.LoadScene("Second Floor");
+    }
+
+    public void LoadFloorThree()
+    {
+        playClickSound();
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Floor 3");
     }
 
     public void LoadMainMenu()
@@ -140,7 +189,6 @@ public class GameManger : MonoBehaviour
     {
         if (Audio_Mangaer.Instance != null)
         {
-            
             Audio_Mangaer.Instance.playClicKSound();
         }
     }
